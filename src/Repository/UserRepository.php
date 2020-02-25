@@ -41,7 +41,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
      */
     public function findByRole($role)
     {
-        /*return $this->_em->createQuery('SELECT u FROM {$this->_entityName} u WHERE u.roles LIKE ')*/
         return $this->_em->createQueryBuilder()
             ->select('u')
             ->from($this->_entityName, 'u')
@@ -55,7 +54,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
      */
     public function findByTwoRole($role1, $role2)
     {
-        /*return $this->_em->createQuery('SELECT u FROM {$this->_entityName} u WHERE u.roles LIKE ')*/
         return $this->_em->createQueryBuilder()
             ->select('u')
             ->from($this->_entityName, 'u')
