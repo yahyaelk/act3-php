@@ -1,0 +1,12 @@
+{% if is_granted('ROLE_ADMIN') %}
+    <p>ADMINISTRADOR</p>
+{% endif %}
+{% if is_granted('ROLE_SUPER') %}
+    <p>SUPER</p>
+{% endif %}
+{% if is_granted('ROLE_USER') %}
+    <p>USER</p>
+{% endif %}
+{% for user in users %}
+    <p>{{ user.username }} - {{ user.roles|join(', ', ' i ') }}</p>
+{% endfor %}

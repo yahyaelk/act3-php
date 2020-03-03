@@ -15,10 +15,10 @@ class RoleController extends AbstractController
      */
     public function mostrarUsuarios(): Response
     {
+        $users = [];
         if ($this->getUser()) {
             $user = $this->getUser();
             $entityManager = $this->getDoctrine()->getManager();
-            $llistat = '';
 
             if (in_array('ROLE_ADMIN', $user->getRoles())) {
                 $users = $entityManager->getRepository(User::class)->findAll();
@@ -27,13 +27,9 @@ class RoleController extends AbstractController
             } else if (in_array('ROLE_USER', $user->getRoles())) {
                 $users = $entityManager->getRepository(User::class)->findByRole('ROLE_USER');
             }
-            if ($users) {
-                for ($i = 0; $i < sizeof($users); $i++) {
-                    $llistat .= $users[$i]->getUsername() . ' - ' . implode(', ', $users[$i]->getRoles()) . '<br>';
-                }
-            }
-            return new Response($llistat);
         }
-        return new Response('No hay usuario');
+        return $this->render('users/show_users.html.twig',[
+            'users' => $users
+        ]);
     }
 }
